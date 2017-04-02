@@ -1,0 +1,7 @@
+development:
+  type: http
+  url: http://user:password@localhost:7474
+
+test:
+  type: http
+  url: http://user:password@localhost:7474
