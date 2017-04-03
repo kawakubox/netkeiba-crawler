@@ -42,6 +42,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'validation_examples_matcher'
 end
 
 group :development do
