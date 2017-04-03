@@ -41,7 +41,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'pry-rails'
+  gem 'rspec-its'
   gem 'rspec-rails'
+  gem 'validation_examples_matcher'
 end
 
 group :development do
