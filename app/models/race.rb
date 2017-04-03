@@ -1,5 +1,6 @@
 class Race
   include Neo4j::ActiveNode
+  include Neo4j::Timestamps
 
   YAHOO_KEIBA_DOMAIN = 'https://keiba.yahoo.co.jp'
 
