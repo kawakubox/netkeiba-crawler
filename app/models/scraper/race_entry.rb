@@ -40,5 +40,10 @@ module Scraper
       else nil
       end
     end
+
+    def distance
+      md = @doc.at('#raceTitMeta').text.match(/(\d+)m/)
+      md[1].to_i if md
+    end
   end
 end

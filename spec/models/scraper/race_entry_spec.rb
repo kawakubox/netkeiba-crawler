@@ -6,7 +6,16 @@ RSpec.describe Scraper::RaceEntry do
   let(:html) { File.read(File.join(Rails.root, 'spec/fixtures/html/race_entry.html')) }
 
   its(:race_key) { is_expected.to eq '1505021210' }
-  its(:race) { is_expected.to be_instance_of Race }
+  its(:race) do
+    is_expected.to be_instance_of Race
+    is_expected.to have_attributes(
+      key: '1505021210',
+      ordinal: 82,
+      name: '東京優駿',
+      grade: :g1,
+      distance: 2400,
+    )
+  end
 
   describe '#ordinal' do
     its(:ordinal) { is_expected.to eq 82 }
