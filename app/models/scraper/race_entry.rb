@@ -17,7 +17,15 @@ module Scraper
     end
 
     def race
-      Race.find_or_initialize_by(key: race_key)
+      race = Race.find_or_initialize_by(key: race_key)
+      race.update(
+        ordinal: ordinal,
+        name: name,
+        grade: grade,
+        distance: distance,
+        weather: weather,
+      )
+      race
     end
 
     def ordinal
@@ -44,6 +52,13 @@ module Scraper
     def distance
       md = @doc.at('#raceTitMeta').text.match(/(\d+)m/)
       md[1].to_i if md
+    end
+
+    def weather
+      return :sunny if @doc.at('img.hare')
+      return :cloudy if @doc.at('img.kumori')
+      return :rainny if @doc.at('img.ame')
+      return :snowy if @doc.at('img.yuki')
     end
   end
 end

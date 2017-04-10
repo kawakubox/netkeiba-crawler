@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Race, type: :model do
-  subject { Race.new(key: '1505021210', ordinal: 82, name: '東京優駿', grade: :g1, distance: 2400) }
+  subject { Race.new(key: '1505021210', ordinal: 82, name: '東京優駿', grade: :g1, distance: 2400, weather: :sunny) }
 
   it { is_expected.to be_valid }
   it { is_expected.to be_invalid_on(:key).with(nil) }
@@ -21,6 +21,8 @@ RSpec.describe Race, type: :model do
 
   it { is_expected.to be_invalid_on(:distance).with(999) }
   it { is_expected.to be_valid_on(:distance).with(1000) }
+
+  it { is_expected.to be_invalid_on(:weather).with(:windy) }
 
   its(:yahoo_race_entry_url) { is_expected.to eq 'https://keiba.yahoo.co.jp/race/denma/1505021210/?page=2' }
 end

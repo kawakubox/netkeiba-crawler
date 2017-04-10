@@ -14,11 +14,11 @@ RSpec.describe Scraper::RaceEntry do
       name: '東京優駿',
       grade: :g1,
       distance: 2400,
+      weather: :sunny,
     )
   end
 
   describe '#ordinal' do
-    its(:ordinal) { is_expected.to eq 82 }
     context 'when non-ordinal' do
       let(:html) { '<div id="raceTitName"><h1>富嶽賞</h1></div>' }
       its(:ordinal) { is_expected.to be_nil }
@@ -26,7 +26,6 @@ RSpec.describe Scraper::RaceEntry do
   end
 
   describe '#name' do
-    its(:name) { is_expected.to eq '東京優駿' }
     context 'when non-ordinal' do
       let(:html) { '<div id="raceTitName"><h1>富嶽賞</h1></div>' }
       its(:name) { is_expected.to eq '富嶽賞'}
@@ -34,7 +33,6 @@ RSpec.describe Scraper::RaceEntry do
   end
 
   describe '#grade' do
-    its(:grade) { is_expected.to eq Race.grades[:g1] }
     context 'when G2' do
       let(:html) { '<div id="raceTitName"><h1>第129回目黒記念（GII）</h1><div>' }
       its(:grade) { is_expected.to eq :g2 }
@@ -46,6 +44,21 @@ RSpec.describe Scraper::RaceEntry do
     context 'when non-grade' do
       let(:html) { '<div id="raceTitName"><h1>富嶽賞</h1></div>' }
       its(:grade) { is_expected.to be_nil }
+    end
+  end
+  
+  describe '#weather' do
+    context 'when kumori' do
+      let(:html) { '<img src="https://s.yimg.jp/images/clear.gif" class="spBg kumori" alt="曇" />' }
+      its(:weather) { is_expected.to eq :cloudy }
+    end
+    context 'when ame' do
+      let(:html) { '<img src="https://s.yimg.jp/images/clear.gif" class="spBg ame" alt="雨" />' }
+      its(:weather) { is_expected.to eq :rainny }
+    end
+    context 'when yuki' do
+      let(:html) { '<img src="https://s.yimg.jp/images/clear.gif" class="spBg yuki" "雪" />' }
+      its(:weather) { is_expected.to eq :snowy }
     end
   end
 end
