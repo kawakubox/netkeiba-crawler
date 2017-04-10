@@ -34,9 +34,9 @@ module Scraper
       md = @doc.at('#raceTitName h1').text.match(/（(.+)）/)
       return unless md
       case md[1]
-      when 'GI' then Race.grades[:g1]
-      when 'GII' then Race.grades[:g2]
-      when 'GIII' then Race.grades[:g3]
+      when 'GI' then :g1
+      when 'GII' then :g2
+      when 'GIII' then :g3
       else nil
       end
     end

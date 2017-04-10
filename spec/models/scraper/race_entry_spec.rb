@@ -37,11 +37,11 @@ RSpec.describe Scraper::RaceEntry do
     its(:grade) { is_expected.to eq Race.grades[:g1] }
     context 'when G2' do
       let(:html) { '<div id="raceTitName"><h1>第129回目黒記念（GII）</h1><div>' }
-      its(:grade) { is_expected.to eq Race.grades[:g2] }
+      its(:grade) { is_expected.to eq :g2 }
     end
     context 'when G3' do
       let(:html) { '<div id="raceTitName"><h1>第1回ラジオNIKKEI杯京都2歳ステークス（GIII）</h1></div>' }
-      its(:grade) { is_expected.to eq Race.grades[:g3] }
+      its(:grade) { is_expected.to eq :g3 }
     end
     context 'when non-grade' do
       let(:html) { '<div id="raceTitName"><h1>富嶽賞</h1></div>' }
