@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+  DisplayCopNames: true
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 128
