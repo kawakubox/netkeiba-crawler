@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Event
   include Neo4j::ActiveNode
   property :key,  type: String, constraint: :unique

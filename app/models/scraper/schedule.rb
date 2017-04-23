@@ -1,13 +1,14 @@
+# frozen_string_literal: true
 module Scraper
   class Schedule
-    YAHOO_KEIBA = 'https://keiba.yahoo.jp'.freeze
+    YAHOO_KEIBA = 'https://keiba.yahoo.jp'
 
     def initialize(html)
       @doc = Nokogiri::HTML(html)
     end
 
     def scrape
-      @doc.search('table.scheLs tr:has(td[rowspan])').map do |e|
+      @doc.search('table.scheLs tr:has(td[rowspan] a)').map do |e|
         ec = EventComponent.new(e, year: year, month: month)
         Event.new(key: ec.key, date: ec.date, name: ec.name)
       end
