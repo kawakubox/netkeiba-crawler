@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
   DisplayCopNames: true
+  TargetRubyVersion: 2.4
 
 Style/Documentation:
   Enabled: false
