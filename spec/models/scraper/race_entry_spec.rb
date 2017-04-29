@@ -54,7 +54,7 @@ RSpec.describe Scraper::RaceEntry do
     end
     context 'when ame' do
       let(:html) { '<img src="https://s.yimg.jp/images/clear.gif" class="spBg ame" alt="雨" />' }
-      its(:weather) { is_expected.to eq :rainny }
+      its(:weather) { is_expected.to eq :rainy }
     end
     context 'when yuki' do
       let(:html) { '<img src="https://s.yimg.jp/images/clear.gif" class="spBg yuki" "雪" />' }

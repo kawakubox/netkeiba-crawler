@@ -57,7 +57,7 @@ module Scraper
     def weather
       return :sunny if @doc.at('img.hare')
       return :cloudy if @doc.at('img.kumori')
-      return :rainny if @doc.at('img.ame')
+      return :rainy if @doc.at('img.ame')
       return :snowy if @doc.at('img.yuki')
     end
   end
