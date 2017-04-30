@@ -13,12 +13,13 @@ RSpec.describe Race, type: :model do
   it { is_expected.to be_valid_on(:ordinal).with(1) }
   it { is_expected.to be_invalid_on(:ordinal).with(1.1) }
 
-  it { is_expected.to be_invalid_on(:name).with(nil) }
+  it { is_expected.to be_valid_on(:name).with(nil) }
   it { is_expected.to be_invalid_on(:name).with('') }
 
   it { is_expected.to be_valid_on(:grade).with(nil) }
   it { is_expected.to be_invalid_on(:grade).with(:g4) }
 
+  it { is_expected.to be_valid_on(:distance).with(nil) }
   it { is_expected.to be_invalid_on(:distance).with(999) }
   it { is_expected.to be_valid_on(:distance).with(1000) }
 

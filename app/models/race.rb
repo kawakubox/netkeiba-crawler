@@ -14,9 +14,9 @@ class Race
 
   validates :key, presence: true, format: /\A\d{10}\Z/
   validates :ordinal, allow_nil: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :name, presence: true
+  validates :name, allow_nil: true, length: { minimum: 1 }
   validates :grade, allow_nil: true, inclusion: { in: Race.grades.keys }
-  validates :distance, numericality: { only_integer: true, greater_than_or_equal_to: 1000 }
+  validates :distance, allow_nil: true, numericality: { only_integer: true, greater_than_or_equal_to: 1000 }
   validates :weather, allow_nil: true, inclusion: { in: Race.weathers.keys }
   validates :course_condition, allow_nil: true, inclusion: { in: Race.course_conditions.keys }
 
