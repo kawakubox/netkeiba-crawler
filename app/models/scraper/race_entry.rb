@@ -7,10 +7,25 @@ module Scraper
     end
 
     def scrape
-      
+      entry_table.search('tr')[1..-1].map do |tr|
+        horse(tr)
+      end
     end
 
     private
+
+    def entry_table
+      @doc.at('table.denmaLs')
+    end
+
+    def horse(tr)
+      element = tr.at('td:nth(3) > a')
+      key = element.attr('href').match(%r{/directory/horse/(\d+)/})[1]
+      name = element.text.strip
+      Horse.find_or_create_by!(key: key) do |h|
+        h.name = name
+      end
+    end
 
     def race_key
       @doc.at('#raceNoNaviC a').attr('href').split('/').last 
