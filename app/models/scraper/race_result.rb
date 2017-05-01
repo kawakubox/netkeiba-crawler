@@ -21,5 +21,10 @@ module Scraper
     def order
       @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)[2].to_i
     end
+
+    def race_time
+      md = @doc.at('td > strong').text.match(/(\d+)?.(\d+).(\d+)/)
+      md[1].to_i * 60 + md[2].to_i + md[3].to_i * 0.1
+    end
   end
 end

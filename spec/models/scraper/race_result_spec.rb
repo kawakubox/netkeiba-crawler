@@ -7,4 +7,5 @@ RSpec.describe Scraper::RaceResult do
   its(:race_key) { is_expected.to eq '1505021210' }
   its(:course_condition) { is_expected.to eq '01' }
   its(:order) { is_expected.to eq 1 }
+  its(:race_time) { is_expected.to eq 143.2 }
 end
