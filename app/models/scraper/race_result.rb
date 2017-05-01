@@ -27,6 +27,14 @@ module Scraper
       md[1].to_i * 60 + md[2].to_i + md[3].to_i * 0.1
     end
 
+    def jockey_key
+      @doc.at('td > a').attr('href').match(%r{/directory/jocky/(\d+)/})[1]
+    end
+
+    def jockey_weight
+      @doc.at('td > a').next_sibling.text.match(/\((\d+)\)/)[1].to_i
+    end
+
     def horse_weight
       @doc.text.match(/(\d{3})\(([+-]?\d+)\)/)[1].to_i
     end
