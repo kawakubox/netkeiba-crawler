@@ -26,5 +26,13 @@ module Scraper
       md = @doc.at('td > strong').text.match(/(\d+)?.(\d+).(\d+)/)
       md[1].to_i * 60 + md[2].to_i + md[3].to_i * 0.1
     end
+
+    def horse_weight
+      @doc.text.match(/(\d{3})\(([+-]?\d+)\)/)[1].to_i
+    end
+
+    def weight_diff
+      @doc.text.match(/(\d{3})\(([+-]?\d+)\)/)[2].to_i
+    end
   end
 end
