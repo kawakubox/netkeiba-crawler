@@ -10,4 +10,7 @@ RSpec.describe Scraper::RaceResult do
   its(:race_time) { is_expected.to eq 143.2 }
   its(:horse_weight) { is_expected.to eq 484 }
   its(:weight_diff) { is_expected.to eq -2 }
+  its(:gate_number) { is_expected.to eq 7 }
+  its(:horse_number) { is_expected.to eq 14 }
+  its(:popularity) { is_expected.to eq 1 }
 end

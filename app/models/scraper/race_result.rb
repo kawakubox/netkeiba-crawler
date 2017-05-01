@@ -34,5 +34,17 @@ module Scraper
     def weight_diff
       @doc.text.match(/(\d{3})\(([+-]?\d+)\)/)[2].to_i
     end
+
+    def gate_number
+      @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)[1].to_i
+    end
+
+    def horse_number
+      @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)[2].to_i
+    end
+
+    def popularity
+      @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)[3].to_i
+    end
   end
 end
