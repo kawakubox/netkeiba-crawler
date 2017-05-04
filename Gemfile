@@ -30,8 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-
-gem 'neo4j'
+gem 'faraday'
 gem 'pg'
 
 group :development, :test do
