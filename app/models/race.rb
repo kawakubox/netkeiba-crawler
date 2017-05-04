@@ -1,14 +1,7 @@
-class Race
-  include Neo4j::ActiveNode
-  include Neo4j::Timestamps
-
+class Race < ApplicationRecord
   YAHOO_KEIBA_DOMAIN = 'https://keiba.yahoo.co.jp'
 
-  property :key, type: String
-  property :ordinal, type: Integer
-  property :name, type: String
   enum grade: { g1: 1, g2: 2, g3: 3 }
-  property :distance, type: Integer
   enum weather: %i(sunny cloudy rainny snowy)
   enum course_condition: %i(good good_to_soft soft heavy)
 
