@@ -2,13 +2,26 @@
 
 module Scraper
   class RaceEntry
-    def initialize(html)
-      @doc = Nokogiri::HTML(html)
+    def initialize(race_key)
+      @race = Race.find_or_create_by!(key: race_key)
+      @doc = Nokogiri::HTML(Faraday.get(@race.yahoo_race_entry_url).body)
     end
 
-    def scrape
+    def scrape!
+      @race.update(
+        ordinal:        ordinal,
+        name:           name,
+        grade:          grade,
+        distance:       distance,
+        weather:        weather,
+        course_condition: course_condition,
+      )
+
       entry_table.search('tr')[1..-1].map do |tr|
-        horse(tr)
+        horse = horse(tr)
+        horse.save!
+        jockey = jockey(tr)
+        jockey.save!
       end
     end
 
