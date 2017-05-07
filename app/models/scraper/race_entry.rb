@@ -14,7 +14,7 @@ module Scraper
         grade:          grade,
         distance:       distance,
         weather:        weather,
-        course_condition: course_condition,
+        course_condition: course_condition
       )
 
       entry_table.search('tr')[1..-1].map do |tr|
