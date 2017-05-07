@@ -62,5 +62,9 @@ module Scraper
     def popularity
       @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)[3].to_i
     end
+
+    def valid?
+      @doc.at('div a').present?
+    end
   end
 end

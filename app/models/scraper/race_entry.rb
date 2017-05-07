@@ -22,6 +22,30 @@ module Scraper
         horse.save!
         jockey = jockey(tr)
         jockey.save!
+
+        tr.search('td')[4..-1].each do |td|
+          parser = Scraper::RaceResult.new(td.to_html)
+          next unless parser.valid?
+          r = Race.find_or_create_by!(key: parser.race_key)
+          j = Jockey.find_or_create_by!(key: parser.jockey_key)
+          hr = HorseResult.find_or_create_by!(
+            horse: horse,
+            race: r,
+            order: parser.order
+          )
+
+          hr.update!(
+            jockey: j,
+            race_time: parser.race_time,
+            course_condition: parser.course_condition,
+            jockey_weight: parser.jockey_weight,
+            horse_weight: parser.horse_weight,
+            weight_diff: parser.weight_diff,
+            gate_number: parser.gate_number,
+            horse_number: parser.horse_number,
+            popularity: parser.popularity
+          )
+        end
       end
     end
 
