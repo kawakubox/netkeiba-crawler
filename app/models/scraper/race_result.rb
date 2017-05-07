@@ -6,10 +6,6 @@ module Scraper
       @doc = Nokogiri::HTML(html)
     end
 
-    def race
-      Race.find_or_create_by!(key: race_key)
-    end
-
     def race_key
       @doc.at('div a').attr('href').match(%r{/race/result/(\d+)/})[1]
     end
