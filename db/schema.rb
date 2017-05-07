@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505113213) do
+ActiveRecord::Schema.define(version: 20170505123015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
 
   create_table "horse_results", force: :cascade do |t|
     t.integer  "race_id"
@@ -30,6 +29,8 @@ ActiveRecord::Schema.define(version: 20170505113213) do
     t.integer  "horse_number"
     t.integer  "popularity"
     t.integer  "course_condition"
+    t.decimal  "last_3f",          precision: 3, scale: 1
+    t.string   "corner_position"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end

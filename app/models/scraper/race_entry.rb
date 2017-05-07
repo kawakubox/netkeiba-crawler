@@ -5,6 +5,7 @@ module Scraper
     def initialize(race_key)
       @race = Race.find_or_create_by!(key: race_key)
       @doc = Nokogiri::HTML(Faraday.get(@race.yahoo_race_entry_url).body)
+      @doc2 = Nokogiri::HTML(Faraday.get(@race.yahoo_race_result_time_url).body)
     end
 
     def scrape!
@@ -44,6 +45,28 @@ module Scraper
             gate_number: parser.gate_number,
             horse_number: parser.horse_number,
             popularity: parser.popularity
+          )
+        end
+      end
+
+      @doc2.at('table.denmaLs').search('tr')[1..-1].each do |tr|
+        horse = horse(tr)
+        horse.save!
+
+        tr.search('td')[4..-1].each do |td|
+          parser = Scraper::RaceResultTime.new(td.to_html)
+          next unless parser.valid?
+
+          r = Race.find_or_create_by!(key: parser.race_key)
+          hr = HorseResult.find_or_create_by!(
+            horse: horse,
+            race: r,
+            order: parser.order
+          )
+
+          hr.update!(
+            last_3f: parser.last_3f,
+            corner_position: parser.corner_position
           )
         end
       end
