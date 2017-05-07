@@ -17,7 +17,7 @@ module Scraper
         course_condition: course_condition
       )
 
-      entry_table.search('tr')[1..-1].map do |tr|
+      entry_table.search('tr')[1..-1].each do |tr|
         horse = horse(tr)
         horse.save!
         jockey = jockey(tr)
