@@ -14,6 +14,10 @@ module Scraper
       end
     end
 
+    def scrape!
+      scrape.map(&:save)
+    end
+
     class EventComponent
       attr_reader :year, :month
 
