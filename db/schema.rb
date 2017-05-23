@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170503000000) do
+ActiveRecord::Schema.define(version: 20170504000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -10,6 +10,15 @@ ActiveRecord::Schema.define(version: 20170503000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_events_on_key", unique: true, using: :btree
+  end
+
+  create_table "horses", force: :cascade do |t|
+    t.string   "key",        null: false
+    t.string   "name"
+    t.date     "birthday"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_horses_on_key", unique: true, using: :btree
   end
 
   create_table "races", force: :cascade do |t|
