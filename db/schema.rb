@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170506000000) do
+ActiveRecord::Schema.define(version: 20170507000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -10,6 +10,30 @@ ActiveRecord::Schema.define(version: 20170506000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_events_on_key", unique: true, using: :btree
+  end
+
+  create_table "horse_results", force: :cascade do |t|
+    t.integer  "horse_id",                                 null: false
+    t.integer  "race_id",                                  null: false
+    t.integer  "jockey_id"
+    t.integer  "trainer_id"
+    t.integer  "order"
+    t.decimal  "race_time",        precision: 4, scale: 1
+    t.decimal  "jockey_weight",    precision: 3, scale: 1
+    t.integer  "horse_weight"
+    t.integer  "weight_diff"
+    t.integer  "gate_number"
+    t.integer  "horse_number"
+    t.integer  "popularity"
+    t.integer  "course_condition"
+    t.decimal  "last_3f",          precision: 3, scale: 1
+    t.string   "corner_position"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["horse_id", "race_id"], name: "index_horse_results_on_horse_id_and_race_id", unique: true, using: :btree
+    t.index ["jockey_id"], name: "index_horse_results_on_jockey_id", using: :btree
+    t.index ["race_id"], name: "index_horse_results_on_race_id", using: :btree
+    t.index ["trainer_id"], name: "index_horse_results_on_trainer_id", using: :btree
   end
 
   create_table "horses", force: :cascade do |t|
