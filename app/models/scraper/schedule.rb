@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Scraper
   class Schedule
     YAHOO_KEIBA = 'https://keiba.yahoo.jp'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Race < ApplicationRecord
   YAHOO_KEIBA_DOMAIN = 'https://keiba.yahoo.co.jp'
 
