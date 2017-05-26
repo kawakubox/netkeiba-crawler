@@ -28,7 +28,7 @@ module Scraper
     end
 
     def race_key
-      @doc.at('#raceNoNaviC a').attr('href').split('/').last 
+      @doc.at('#raceNoNaviC a').attr('href').split('/').last
     end
 
     def race
@@ -38,7 +38,7 @@ module Scraper
         name: name,
         grade: grade,
         distance: distance,
-        weather: weather,
+        weather: weather
       )
       race
     end
@@ -60,7 +60,6 @@ module Scraper
       when 'GI' then :g1
       when 'GII' then :g2
       when 'GIII' then :g3
-      else nil
       end
     end
 

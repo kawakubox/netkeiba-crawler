@@ -6,6 +6,6 @@ class Event < ApplicationRecord
   validates :name,    presence: true
 
   def url
-    "https://keiba.yahoo.co.jp/race/list/#{key}/" 
+    "https://keiba.yahoo.co.jp/race/list/#{key}/"
   end
 end

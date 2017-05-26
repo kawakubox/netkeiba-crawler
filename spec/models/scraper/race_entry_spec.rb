@@ -16,7 +16,7 @@ RSpec.describe Scraper::RaceEntry do
       name: '東京優駿',
       grade: :g1,
       distance: 2400,
-      weather: :sunny,
+      weather: :sunny
     )
   end
 
@@ -30,7 +30,7 @@ RSpec.describe Scraper::RaceEntry do
   describe '#name' do
     context 'when non-ordinal' do
       let(:html) { '<div id="raceTitName"><h1>富嶽賞</h1></div>' }
-      its(:name) { is_expected.to eq '富嶽賞'}
+      its(:name) { is_expected.to eq '富嶽賞' }
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe Scraper::RaceEntry do
       its(:grade) { is_expected.to be_nil }
     end
   end
-  
+
   describe '#weather' do
     context 'when kumori' do
       let(:html) { '<img src="https://s.yimg.jp/images/clear.gif" class="spBg kumori" alt="曇" />' }

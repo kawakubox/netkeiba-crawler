@@ -4,8 +4,8 @@ class Race < ApplicationRecord
   YAHOO_KEIBA_DOMAIN = 'https://keiba.yahoo.co.jp'
 
   enum grade: { g1: 1, g2: 2, g3: 3 }
-  enum weather: %i(sunny cloudy rainny snowy)
-  enum course_condition: %i(good good_to_soft soft heavy)
+  enum weather: %i[sunny cloudy rainny snowy]
+  enum course_condition: %i[good good_to_soft soft heavy]
 
   validates :key, presence: true, format: /\A\d{10}\Z/
   validates :ordinal, allow_nil: true, numericality: { only_integer: true, greater_than: 0 }
