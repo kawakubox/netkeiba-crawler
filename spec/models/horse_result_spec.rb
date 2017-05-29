@@ -15,4 +15,6 @@ RSpec.describe HorseResult do
   end
 
   it { is_expected.to be_invalid_on(:race).with(nil) }
+  it { is_expected.to be_valid_on(:jockey).with(nil) }
+  it { is_expected.to be_valid_on(:trainer).with(nil) }
 end
