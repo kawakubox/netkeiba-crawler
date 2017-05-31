@@ -83,5 +83,12 @@ module Scraper
       return :rainy if @doc.at('img.ame')
       return :snowy if @doc.at('img.yuki')
     end
+
+    def course_condition
+      return :good if @doc.at('img.ryou')
+      return :good_to_soft if @doc.at('img.yayaomo')
+      return :soft if @doc.at('img.omo')
+      return :heavy if @doc.at('img.furyou')
+    end
   end
 end
