@@ -35,12 +35,20 @@ module Scraper
       @doc.at('td > a').next_sibling.text.match(/\((\d+)\)/)[1].to_i
     end
 
+    # 馬体重を抜き出す
+    #
+    # (ex) 484(-2) の 456
+    # @return 馬体重[Integer]
     def horse_weight
-      @doc.text.match(/(\d{3})\(([+-]?\d+)\)/)[1].to_i
+      @doc.text.match(/(\d{3})\((.+)\)/)[1].to_i
     end
 
+    # 馬体重の増減を抜き出す
+    #
+    # (ex) 484(-2) の -4
+    # @return 馬体重の増減[Integer]
     def weight_diff
-      @doc.text.match(/(\d{3})\(([+-]?\d+)\)/)[2].to_i
+      @doc.text.match(/(\d{3})\((.+)\)/)[2].to_i
     end
 
     def gate_number
