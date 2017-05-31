@@ -43,6 +43,15 @@ module Scraper
       race
     end
 
+    def jockey(tr)
+      element = tr.at('td:nth(4) > a')
+      key = element.attr('href').match(%r{/directory/jocky/(\d+)/})[1]
+      name = element.text.strip
+      Jockey.find_or_initialize_by(key: key) do |j|
+        j.name = name
+      end
+    end
+
     def ordinal
       md = @doc.at('#raceTitName h1').text.match(/第(\d+)回/)
       md[1].to_i if md
