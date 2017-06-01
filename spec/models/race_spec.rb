@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe Race, type: :model do
   subject { FG.build :race }
 
+  it { is_expected.to respond_to :event }
   it { is_expected.to be_valid }
   it { is_expected.to be_invalid_on(:key).with(nil) }
   it { is_expected.to be_invalid_on(:key).with('150502121') }

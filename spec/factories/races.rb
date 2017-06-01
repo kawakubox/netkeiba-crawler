@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :race do
+    event
     key { FFaker::String.from_regexp /\d{10}/ }
     ordinal Random.rand(100)
     name { %w[皐月賞 東京優駿 菊花賞 桜花賞 優駿牝馬 天皇賞(春) 天皇賞(秋) 有馬記念].sample }
