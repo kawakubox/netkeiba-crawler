@@ -15,16 +15,16 @@ RSpec.describe Scraper::Schedule do
   its(:scrape) { is_expected.to all(be_a(Event)) }
   its('scrape.first') do
     is_expected.to have_attributes(
-      key: '17060101',
-      date: Date.new(2017, 1, 5),
-      name: '1回中山1日'
+      key:     '17060101',
+      held_on: Date.new(2017, 1, 5),
+      name:    '1回中山1日'
     )
   end
   its('scrape.last') do
     is_expected.to have_attributes(
-      key: '17080202',
-      date: Date.new(2017, 1, 29),
-      name: '2回京都2日'
+      key:     '17080202',
+      held_on: Date.new(2017, 1, 29),
+      name:    '2回京都2日'
     )
   end
 end
