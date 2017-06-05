@@ -30,6 +30,6 @@ class Race < ApplicationRecord
   private
 
   def create_event
-    self.event = Event.create(key: key[0...8]) unless event_id
+    self.event = Event.find_or_create_by!(key: key[0...8]) unless event_id
   end
 end
