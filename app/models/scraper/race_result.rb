@@ -30,7 +30,7 @@ module Scraper
     end
 
     def jockey_weight
-      @doc.at('td > a').next_sibling.text.match(/\((\d+)\)/)[1].to_i
+      @doc.at('td > a').next_sibling.text.match(/\(([0-9.]+)\)/)[1].to_i
     end
 
     # 馬体重を抜き出す
