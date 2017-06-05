@@ -17,11 +17,19 @@ class Race < ApplicationRecord
   validates :weather, allow_nil: true, inclusion: { in: Race.weathers.keys }
   validates :course_condition, allow_nil: true, inclusion: { in: Race.course_conditions.keys }
 
+  before_validation :create_event
+
   def yahoo_race_entry_url
     URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{key}/?page=2").to_s
   end
 
   def yahoo_race_result_time_url
     URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{key}/?page=3").to_s
+  end
+
+  private
+
+  def create_event
+    self.event = Event.create(key: key[0...8]) unless event_id
   end
 end
