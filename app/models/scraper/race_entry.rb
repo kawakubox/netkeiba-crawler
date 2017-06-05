@@ -24,6 +24,12 @@ module Scraper
         jockey = jockey(tr)
         jockey.save!
 
+        HorseResult.find_or_create_by!(horse: horse, race: @race) do |hr|
+          hr.gate_number = gate_number(tr)
+          hr.horse_number = horse_number(tr)
+          hr.jockey = jockey
+        end
+
         tr.search('td')[4..-1].each do |td|
           parser = Scraper::RaceResult.new(td.to_html)
           next unless parser.valid?
@@ -76,6 +82,14 @@ module Scraper
 
     def entry_table
       @doc.at('table.denmaLs')
+    end
+
+    def gate_number(tr)
+      tr.at('td:nth(1)').text.to_i
+    end
+
+    def horse_number(tr)
+      tr.at('td:nth(2)').text.to_i
     end
 
     def horse(tr)
