@@ -11,16 +11,18 @@ module Scraper
     end
 
     def course_condition
-      @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)[1]
+      md = @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)
+      md[1] if md
     end
 
     def order
-      @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)[2].to_i
+      md = @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)
+      md[2].to_i if md
     end
 
     def race_time
       md = @doc.at('td > strong').text.match(/(\d+)?.(\d+).(\d+)/)
-      md[1].to_i * 60 + md[2].to_i + md[3].to_i * 0.1
+      md[1].to_i * 60 + md[2].to_i + md[3].to_i * 0.1 if md
     end
 
     def jockey_key
@@ -36,7 +38,8 @@ module Scraper
     # (ex) 484(-2) の 456
     # @return 馬体重[Integer]
     def horse_weight
-      @doc.text.match(/(\d{3})\((.+)\)/)[1].to_i
+      md = @doc.text.match(/(\d{3})\((.+)\)/)
+      md[1].to_i if md
     end
 
     # 馬体重の増減を抜き出す
@@ -44,19 +47,23 @@ module Scraper
     # (ex) 484(-2) の -4
     # @return 馬体重の増減[Integer]
     def weight_diff
-      @doc.text.match(/(\d{3})\((.+)\)/)[2].to_i
+      md = @doc.text.match(/(\d{3})\((.+)\)/)
+      md[2].to_i if md
     end
 
     def gate_number
-      @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)[1].to_i
+      md = @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)
+      md[1].to_i if md
     end
 
     def horse_number
-      @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)[2].to_i
+      md = @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)
+      md[2].to_i if md
     end
 
     def popularity
-      @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)[3].to_i
+      md = @doc.text.match(/\[(\d+)\](\d+)\((\d+)人\)/)
+      md[3].to_i if md
     end
 
     def valid?

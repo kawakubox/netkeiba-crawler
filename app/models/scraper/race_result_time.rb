@@ -11,19 +11,23 @@ module Scraper
     end
 
     def course_condition
-      @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)[1]
+      md = @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)
+      md[1] if md
     end
 
     def order
-      @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)[2].to_i
+      md = @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)
+      md[2].to_i if md
     end
 
     def last_3f
-      @doc.text.match(/\([0-9.]{4} - [0-9.]{4}\) ([0-9.]{4})/)[1].to_f
+      md = @doc.text.match(/\([0-9.]{4} - [0-9.]{4}\) ([0-9.]{4})/)
+      md[1].to_f if md
     end
 
     def corner_position
-      @doc.text.match(/(\d{2}(-\d{2})*)? \[\d{1,}人-\d{1,2}\]/)[1]
+      md = @doc.text.match(/(\d{2}(-\d{2})*)? \[\d{1,}人-\d{1,2}\]/)
+      md[1] if md
     end
 
     def valid?
