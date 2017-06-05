@@ -38,4 +38,11 @@ RSpec.describe Race, type: :model do
     subject.key = '1505021210'
     is_expected.to eq 'https://keiba.yahoo.co.jp/race/denma/1505021210/?page=2'
   end
+
+  describe 'before_save' do
+    it 'create event' do
+      expect { Race.create!(key: '1234567890') }
+        .to change { Event.find_by(key: '12345678') }.from(nil).to(be_present)
+    end
+  end
 end
