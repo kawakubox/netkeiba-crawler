@@ -61,13 +61,10 @@ module Scraper
           next unless parser.valid?
 
           r = Race.find_or_create_by!(key: parser.race_key)
-          hr = HorseResult.find_or_create_by!(
-            horse: horse,
-            race: r,
-            order: parser.order
-          )
+          hr = HorseResult.find_or_create_by!(horse: horse, race: r)
 
           hr.update!(
+            order: parser.order,
             last_3f: parser.last_3f,
             corner_position: parser.corner_position
           )
