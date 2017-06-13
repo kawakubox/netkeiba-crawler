@@ -4,8 +4,12 @@ module Scraper
   class RaceEntry
     def initialize(race_key)
       @race = Race.find_or_create_by!(key: race_key)
-      @doc = Nokogiri::HTML(Faraday.get(@race.yahoo_race_entry_url).body)
-      @doc2 = Nokogiri::HTML(Faraday.get(@race.yahoo_race_result_time_url).body)
+      response = Faraday.get(@race.yahoo_race_entry_url)
+      raise StandardError unless response.success?
+      @doc = Nokogiri::HTML(response.body)
+      response = Faraday.get(@race.yahoo_race_result_time_url)
+      raise StandardError unless response.success?
+      @doc2 = Nokogiri::HTML(response.body)
     end
 
     def scrape!
