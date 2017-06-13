@@ -11,12 +11,15 @@ module Scraper
     def scrape
       @doc.search('table.scheLs tr:has(td[rowspan] a)').map do |e|
         ec = EventComponent.new(e, year: year, month: month)
-        Event.new(key: ec.key, held_on: ec.date, name: ec.name)
+        event = Event.find_or_initialize_by(key: ec.key)
+        event.held_on = ec.date
+        event.name = ec.name
+        event
       end
     end
 
     def scrape!
-      scrape.map(&:save)
+      scrape.map(&:save!)
     end
 
     class EventComponent
