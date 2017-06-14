@@ -35,7 +35,7 @@ module Scraper
         end
 
         tr.search('td')[4..-1].each do |td|
-          parser = Scraper::RaceResult.new(td.to_html)
+          parser = Scraper::RaceResultCell.new(td.to_html)
           next unless parser.valid?
           r = Race.find_or_create_by!(key: parser.race_key)
           j = Jockey.find_or_create_by!(key: parser.jockey_key)
