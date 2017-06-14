@@ -69,5 +69,21 @@ module Scraper
     def valid?
       @doc.at('div a').present?
     end
+
+    def params
+      h = {
+        jockey:           Jockey.find_or_create_by!(key: jockey_key),
+        order:            order,
+        race_time:        race_time,
+        course_condition: course_condition,
+        jockey_weight:    jockey_weight,
+        horse_weight:     horse_weight,
+        weight_diff:      weight_diff,
+        gate_number:      gate_number,
+        horse_number:     horse_number,
+        popularity:       popularity
+      }
+      h.delete_if { |_k, v| v.nil? }
+    end
   end
 end
