@@ -28,11 +28,11 @@ module Scraper
         jockey = jockey(tr)
         jockey.save!
 
-        HorseResult.find_or_create_by!(horse: horse, race: @race) do |hr|
-          hr.gate_number = gate_number(tr)
-          hr.horse_number = horse_number(tr)
-          hr.jockey = jockey
-        end
+        hr = HorseResult.find_or_create_by!(horse: horse, race: @race)
+        hr.gate_number = gate_number(tr)
+        hr.horse_number = horse_number(tr)
+        hr.jockey = jockey
+        hr.save!
 
         tr.search('td')[4..-1].each do |td|
           parser = Scraper::RaceResultCell.new(td.to_html)
@@ -41,18 +41,7 @@ module Scraper
           j = Jockey.find_or_create_by!(key: parser.jockey_key)
           hr = HorseResult.find_or_create_by!(horse: horse, race: r)
 
-          hr.update!(
-            order: parser.order,
-            jockey: j,
-            race_time: parser.race_time,
-            course_condition: parser.course_condition,
-            jockey_weight: parser.jockey_weight,
-            horse_weight: parser.horse_weight,
-            weight_diff: parser.weight_diff,
-            gate_number: parser.gate_number,
-            horse_number: parser.horse_number,
-            popularity: parser.popularity
-          )
+          hr.update!(parser.params)
         end
       end
 
