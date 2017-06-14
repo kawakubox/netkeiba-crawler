@@ -50,7 +50,7 @@ module Scraper
         horse.save!
 
         tr.search('td')[4..-1].each do |td|
-          parser = Scraper::RaceResultTime.new(td.to_html)
+          parser = Scraper::RaceResultTimeCell.new(td.to_html)
           next unless parser.valid?
 
           r = Race.find_or_create_by!(key: parser.race_key)

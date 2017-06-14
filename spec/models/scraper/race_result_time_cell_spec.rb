@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe Scraper::RaceResultTime do
+RSpec.describe Scraper::RaceResultTimeCell do
   let(:html) { File.read(File.join(Rails.root, 'spec/fixtures/html/yahoo_race_result_time_cell.html')) }
-  subject { Scraper::RaceResultTime.new(html) }
+  subject { Scraper::RaceResultTimeCell.new(html) }
 
   its(:race_key) { is_expected.to eq '1505021210' }
   its(:course_condition) { is_expected.to eq '01' }

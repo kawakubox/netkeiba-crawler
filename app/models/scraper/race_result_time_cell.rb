@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Scraper
-  class RaceResultTime
+  class RaceResultTimeCell
     def initialize(html)
       @doc = Nokogiri::HTML(html)
     end
