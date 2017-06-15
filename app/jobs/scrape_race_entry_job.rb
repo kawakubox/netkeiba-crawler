@@ -7,5 +7,7 @@ class ScrapeRaceEntryJob < ApplicationJob
 
   def perform(race: race)
     Scraper::RaceEntry.new(race.key).scrape!
+    sleep(5)
+    Scraper::RaceResultTime.new(race.key).scrape!
   end
 end

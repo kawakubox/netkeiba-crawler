@@ -7,13 +7,10 @@ module Scraper
       response = Faraday.get(@race.yahoo_race_entry_url)
       raise StandardError unless response.success?
       @doc = Nokogiri::HTML(response.body)
-      response = Faraday.get(@race.yahoo_race_result_time_url)
-      raise StandardError unless response.success?
-      @doc2 = Nokogiri::HTML(response.body)
     end
 
     def scrape!
-      @race.update(
+      @race.update!(
         ordinal:        ordinal,
         name:           name,
         grade:          grade,
@@ -42,25 +39,6 @@ module Scraper
           hr = HorseResult.find_or_create_by!(horse: horse, race: r)
 
           hr.update!(parser.params)
-        end
-      end
-
-      @doc2.at('table.denmaLs').search('tr')[1..-1].each do |tr|
-        horse = horse(tr)
-        horse.save!
-
-        tr.search('td')[4..-1].each do |td|
-          parser = Scraper::RaceResultTimeCell.new(td.to_html)
-          next unless parser.valid?
-
-          r = Race.find_or_create_by!(key: parser.race_key)
-          hr = HorseResult.find_or_create_by!(horse: horse, race: r)
-
-          hr.update!(
-            order: parser.order,
-            last_3f: parser.last_3f,
-            corner_position: parser.corner_position
-          )
         end
       end
     end
