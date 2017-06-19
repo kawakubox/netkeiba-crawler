@@ -40,6 +40,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'pry-rails'
+  gem 'rails-controller-testing'
   gem 'rspec-its'
   gem 'rspec-rails'
   gem 'validation_examples_matcher'

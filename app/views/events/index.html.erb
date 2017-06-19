@@ -1,0 +1,23 @@
+<div>
+  <%= form_tag events_path, method: :get do %>
+    <%= select_tag :year, options_for_select((2000..@year).to_a.reverse, selected: @year) %> 年
+    <%= select_tag :month, options_for_select((1..12), selected: @month) %> 月
+    <%= submit_tag '移動' %>
+  <% end %>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>開催日</th>
+        <th>開催名</th>
+      </tr>
+    </thead>
+    <% @events.each do |e| %>
+      <tr>
+        <td><%= e.held_on %></td>
+        <td><%= e.name %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
