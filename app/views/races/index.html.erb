@@ -1,0 +1,22 @@
+<h1><%= @event.name %></h1>
+
+<div>
+  <table>
+    <tr>
+      <thead>
+        <th>レース</th>
+        <th>レース名</th>
+        <th>距離</th>
+      </thead>
+      <tbody>
+        <% @races.each do |r| %>
+          <tr>
+            <td><%= r.number %>R</td>
+            <td><%= r.name %></td>
+            <td><%= r.distance %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </tr>
+  </table>
+</div>

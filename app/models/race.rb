@@ -19,6 +19,10 @@ class Race < ApplicationRecord
 
   before_validation :create_event
 
+  def number
+    key.slice(-2, 2).to_i
+  end
+
   def yahoo_race_entry_url
     URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{key}/?page=2").to_s
   end
