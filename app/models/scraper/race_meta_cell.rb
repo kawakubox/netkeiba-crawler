@@ -26,6 +26,10 @@ module Scraper
       end
     end
 
+    def kind
+      race_tit_meta.text.include?('障害') ? :steeplechase : :flat
+    end
+
     def course_type
       md = race_tit_meta.text.match(/(芝→ダート|芝|ダート)/)
       return unless md
@@ -33,6 +37,26 @@ module Scraper
         when '芝→ダート' then :turf_to_dirt
         when '芝' then :turf
         when 'ダート' then :dirt
+      end
+    end
+
+    def direction
+      md = race_tit_meta.text.match(/(左|右|直線)/)
+      return unless md
+      case md[1]
+      when '右' then :right
+      when '左' then :left
+      when '直線' then :straight
+      end
+    end
+
+    def circumference
+      md = race_tit_meta.text.match(/(外->内|内|外)/)
+      return unless md
+      case md[1]
+      when '外->内' then :outer_to_inner
+      when '内' then :inner
+      when '外' then :outer
       end
     end
 

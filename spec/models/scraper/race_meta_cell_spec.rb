@@ -44,6 +44,14 @@ RSpec.describe Scraper::RaceMetaCell do
     end
   end
 
+  describe '#kind' do
+    its(:kind) { is_expected.to eq :flat }
+    context 'when 障害レース' do
+      let(:html) { '<p id="raceTitMeta">障害・芝→ダート 2910m <span>|</span></p>' }
+      its(:kind) { is_expected.to eq :steeplechase }
+    end
+  end
+
   describe '#course_type' do
     context 'when 芝→ダート' do
       let(:html) { '<p id="raceTitMeta">障害・芝→ダート 2910m <span>|</span></p>' }
@@ -56,6 +64,30 @@ RSpec.describe Scraper::RaceMetaCell do
     context 'when ダート' do
       let(:html) { '<p id="raceTitMeta">ダート・左 1600m <span>|</span></p>' }
       its(:course_type) { is_expected.to eq :dirt }
+    end
+  end
+
+  describe '#direction' do
+    its(:direction) { is_expected.to eq :left }
+    context 'when 右回りコース' do
+      let(:html) { '<p id="raceTitMeta">芝・右・外 1600m <span>|</span></p>' }
+      its(:direction) { is_expected.to eq :right }
+    end
+    context 'when 直線コース' do
+      let(:html) { '<p id="raceTitMeta">芝・直線 1000m </p>' }
+      its(:direction) { is_expected.to eq :straight }
+    end
+  end
+
+  describe '#circumference' do
+    its(:circumference) { is_expected.to be_nil }
+    context 'when 外回り' do
+      let(:html) { '<p id="raceTitMeta">芝・右・外 1600m <span>|</span></p>' }
+      its(:circumference) { is_expected.to eq :outer }
+    end
+    context 'when 外→内回り' do
+      let(:html) { '<p id="raceTitMeta">障害・芝・外->内 2890m <span>|</span></p>' }
+      its(:circumference) { is_expected.to eq :outer_to_inner }
     end
   end
 
