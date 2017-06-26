@@ -17,6 +17,10 @@ module Scraper
         ordinal:          race_meta.ordinal,
         name:             race_meta.name,
         grade:            race_meta.grade,
+        kind:             race_meta.kind,
+        course_type:      race_meta.course_type,
+        direction:        race_meta.direction,
+        circumference:    race_meta.circumference,
         distance:         race_meta.distance,
         weather:          race_meta.weather,
         course_condition: race_meta.course_condition

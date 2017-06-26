@@ -1,3 +1,4 @@
+ActiveRecord::Schema.define(version: 20170625012735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +64,10 @@
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "event_id",         null: false
+    t.integer  "kind"
+    t.integer  "course_type"
+    t.integer  "direction"
+    t.integer  "circumference"
     t.index ["event_id"], name: "index_races_on_event_id", using: :btree
     t.index ["key"], name: "index_races_on_key", unique: true, using: :btree
   end

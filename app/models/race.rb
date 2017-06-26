@@ -8,6 +8,10 @@ class Race < ApplicationRecord
   enum grade: { g1: 1, g2: 2, g3: 3 }
   enum weather: %i[sunny cloudy rainy snowy]
   enum course_condition: %i[good good_to_soft soft heavy]
+  enum course_type: %i[turf dirt turf_to_dirt]
+  enum kind: %i[flat steeplechase]
+  enum direction: %i[right left straight]
+  enum circumference: %i[inner outer outer_to_inner]
 
   validates :key, presence: true, uniqueness: true, format: /\A\d{10}\Z/
   validates :ordinal, allow_nil: true, numericality: { only_integer: true, greater_than: 0 }
