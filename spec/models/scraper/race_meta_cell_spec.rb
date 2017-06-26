@@ -16,6 +16,34 @@ RSpec.describe Scraper::RaceMetaCell do
 
   subject { Scraper::RaceMetaCell.new(html) }
 
+  describe '#ordinal' do
+    its(:ordinal) { is_expected.to eq 82 }
+    context 'when non-ordinal' do
+      let(:html) { '<div id="raceTitName"><h1>富嶽賞</h1></div>' }
+      its(:ordinal) { is_expected.to be_nil }
+    end
+  end
+
+  describe '#name' do
+    its(:name) { is_expected.to eq '東京優駿' }
+  end
+
+  describe '#grade' do
+    its(:grade) { is_expected.to eq :g1 }
+    context 'when G2' do
+      let(:html) { '<div id="raceTitName"><h1>第129回目黒記念（GII）</h1><div>' }
+      its(:grade) { is_expected.to eq :g2 }
+    end
+    context 'when G3' do
+      let(:html) { '<div id="raceTitName"><h1>第1回ラジオNIKKEI杯京都2歳ステークス（GIII）</h1></div>' }
+      its(:grade) { is_expected.to eq :g3 }
+    end
+    context 'when non-grade' do
+      let(:html) { '<div id="raceTitName"><h1>富嶽賞</h1></div>' }
+      its(:grade) { is_expected.to be_nil }
+    end
+  end
+
   describe '#course_type' do
     context 'when 芝→ダート' do
       let(:html) { '<p id="raceTitMeta">障害・芝→ダート 2910m <span>|</span></p>' }
@@ -37,6 +65,18 @@ RSpec.describe Scraper::RaceMetaCell do
 
   describe '#weather' do
     its(:weather) { is_expected.to eq :sunny }
+    context 'when kumori' do
+      let(:html) { '<p id="raceTitMeta"><img src="https://s.yimg.jp/images/clear.gif" class="spBg kumori" alt="曇" /></p>' }
+      its(:weather) { is_expected.to eq :cloudy }
+    end
+    context 'when ame' do
+      let(:html) { '<p id="raceTitMeta"><img src="https://s.yimg.jp/images/clear.gif" class="spBg ame" alt="雨" /></p>' }
+      its(:weather) { is_expected.to eq :rainy }
+    end
+    context 'when yuki' do
+      let(:html) { '<p id="raceTitMeta"><img src="https://s.yimg.jp/images/clear.gif" class="spBg yuki" "雪" /></p>' }
+      its(:weather) { is_expected.to eq :snowy }
+    end
   end
 
   describe '#course_condition' do
