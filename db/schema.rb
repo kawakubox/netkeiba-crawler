@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170625012735) do
+ActiveRecord::Schema.define(version: 20170627164227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 20170625012735) do
     t.index ["key"], name: "index_jockeys_on_key", unique: true, using: :btree
   end
 
+  create_table "race_names", force: :cascade do |t|
+    t.string   "long_name",  null: false
+    t.string   "short_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["long_name"], name: "index_race_names_on_long_name", unique: true, using: :btree
+    t.index ["short_name"], name: "index_race_names_on_short_name", unique: true, using: :btree
+  end
+
   create_table "races", force: :cascade do |t|
     t.string   "key",              null: false
     t.integer  "ordinal"
@@ -68,8 +77,10 @@ ActiveRecord::Schema.define(version: 20170625012735) do
     t.integer  "course_type"
     t.integer  "direction"
     t.integer  "circumference"
+    t.integer  "race_name_id"
     t.index ["event_id"], name: "index_races_on_event_id", using: :btree
     t.index ["key"], name: "index_races_on_key", unique: true, using: :btree
+    t.index ["race_name_id"], name: "index_races_on_race_name_id", using: :btree
   end
 
   create_table "trainers", force: :cascade do |t|
