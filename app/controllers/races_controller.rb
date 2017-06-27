@@ -7,9 +7,8 @@ class RacesController < ApplicationController
   end
 
   def show
-    @race = Race.find_by(key: params[:id])
-    @entries = HorseResult.where(race: @race).order(:horse_number)
-    @gates = HorseResult.where(race: @race).group(:gate_number).count(:id)
+    @race = Race.find(params[:id])
+    @entries = @race.horse_results.order(:horse_number)
     @gate_manager = GateManager.new(@entries.count)
   end
 end

@@ -1,3 +1,42 @@
 // Place all the styles related to the races controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.gate {
+  text-align: center;
+}
+
+.gate-1 {
+  background-color: white;
+}
+
+.gate-2 {
+  background-color: black;
+  color: white
+}
+
+.gate-3 {
+  background-color: red;
+}
+
+.gate-4 {
+  background-color: blue;
+  color: white
+}
+
+.gate-5 {
+  background-color: yellow;
+}
+
+.gate-6 {
+  background-color: green;
+  color: white
+}
+
+.gate-7 {
+  background-color: orange;
+}
+
+.gate-8 {
+  background-color: pink;
+}

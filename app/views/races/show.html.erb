@@ -1,0 +1,49 @@
+<div>
+  <h1><%= @race.name %></h1>
+</div>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>枠番</th>
+        <th>馬番</th>
+        <th>馬名</th>
+        <th>騎手</th>
+        <th colspan="5"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @entries.each do |e| %>
+        <tr>
+          <% if @gate_manager.head_of_gate?(e.horse_number) %>
+            <td class="gate <%= 'gate-' + e.gate_number.to_s %>"
+                rowspan="<%= @gate_manager.gates[e.gate_number].length %>" >
+              <%= e.gate_number %>
+            </td>
+          <% end %>
+          <td><%= e.horse_number %></td>
+          <td><%= e.horse.name %></td>
+          <td><%= e.jockey.name %> <%= e.jockey_weight %></td>
+
+          <% e.horse.latest_results(e.race.event.held_on).each do |hr| %>
+            <% race = hr.race %>
+            <td>
+              <div>
+                <div>
+                  <%= race.name %>
+                </div>
+                <div>
+                  <%= race.distance %>
+                </div>
+                <div>
+                  <%= hr.order %>(<%= hr.popularity %>人)
+                </div>
+              </div>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

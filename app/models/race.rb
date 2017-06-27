@@ -4,6 +4,7 @@ class Race < ApplicationRecord
   YAHOO_KEIBA_DOMAIN = 'https://keiba.yahoo.co.jp'
 
   belongs_to :event
+  has_many :horse_results
 
   enum grade: { g1: 1, g2: 2, g3: 3 }
   enum weather: %i[sunny cloudy rainy snowy]
