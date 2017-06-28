@@ -4,6 +4,7 @@ class Race < ApplicationRecord
   YAHOO_KEIBA_DOMAIN = 'https://keiba.yahoo.co.jp'
 
   belongs_to :event
+  belongs_to :race_name
   has_many :horse_results
 
   enum grade: { g1: 1, g2: 2, g3: 3 }

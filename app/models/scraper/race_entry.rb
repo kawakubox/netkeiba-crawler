@@ -16,6 +16,7 @@ module Scraper
       @race.update!(
         ordinal:          race_meta.ordinal,
         name:             race_meta.name,
+        race_name:        race_meta.race_name,
         grade:            race_meta.grade,
         kind:             race_meta.kind,
         course_type:      race_meta.course_type,

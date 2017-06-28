@@ -13,7 +13,11 @@ module Scraper
 
     def name
       md = race_tit_name.text.match(/(第\d+回)?(.+)/)
-      md[2].gsub(/（.+）/, '') if md
+      md[2].gsub(/（.+）/, '').strip if md
+    end
+
+    def race_name
+      RaceName.find_or_create_by(long_name: name)
     end
 
     def grade
