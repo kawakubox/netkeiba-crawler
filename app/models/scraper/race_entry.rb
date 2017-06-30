@@ -34,10 +34,12 @@ module Scraper
         jockey.save!
 
         hr = HorseResult.find_or_create_by!(horse: horse, race: @race)
-        hr.gate_number = gate_number(tr)
-        hr.horse_number = horse_number(tr)
-        hr.jockey = jockey
-        hr.save!
+        hr.update!(
+          gate_number:   gate_number(tr),
+          horse_number:  horse_number(tr),
+          jockey:        jockey,
+          jockey_weight: jockey_weight(tr)
+        )
 
         tr.search('td')[4..-1].each do |td|
           parser = Scraper::RaceResultCell.new(td.to_html)
@@ -81,6 +83,10 @@ module Scraper
       Jockey.find_or_initialize_by(key: key) do |j|
         j.name = name
       end
+    end
+
+    def jockey_weight(tr)
+      tr.at('td:nth(4) > a').text.match(/([\d.]+)/).to_f
     end
   end
 end
