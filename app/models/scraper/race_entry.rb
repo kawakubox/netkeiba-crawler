@@ -78,10 +78,9 @@ module Scraper
     def jockey(tr)
       element = tr.at('td:nth(4) > a')
       key = element.attr('href').match(%r{/directory/jocky/(\d+)/})[1]
-      name = element.text.strip
-      Jockey.find_or_initialize_by(key: key) do |j|
-        j.name = name
-      end
+      j = Jockey.find_or_initialize_by(key: key)
+      j.name = element.text.strip
+      j
     end
 
     def jockey_weight(tr)
