@@ -4,6 +4,9 @@ AllCops:
   DisplayCopNames: true
   TargetRubyVersion: 2.4
 
+Style/AsciiComments:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
