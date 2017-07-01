@@ -24,9 +24,9 @@ module Scraper
       md = race_tit_name.text.match(/（(.+)）/)
       return unless md
       case md[1]
-        when 'GI' then :g1
-        when 'GII' then :g2
-        when 'GIII' then :g3
+      when 'GI' then :g1
+      when 'GII' then :g2
+      when 'GIII' then :g3
       end
     end
 
@@ -38,9 +38,9 @@ module Scraper
       md = race_tit_meta.text.match(/(芝→ダート|芝|ダート)/)
       return unless md
       case md[1]
-        when '芝→ダート' then :turf_to_dirt
-        when '芝' then :turf
-        when 'ダート' then :dirt
+      when '芝→ダート' then :turf_to_dirt
+      when '芝' then :turf
+      when 'ダート' then :dirt
       end
     end
 
