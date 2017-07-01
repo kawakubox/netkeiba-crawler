@@ -21,8 +21,8 @@ module Scraper
     end
 
     def race_time
-      md = @doc.at('td > strong').text.match(/(\d+)?.(\d+).(\d+)/)
-      md[1].to_i * 60 + md[2].to_i + md[3].to_i * 0.1 if md
+      md = @doc.at('td > strong').text.match(/((\d{1})?\.)?(\d+)\.(\d+)/)
+      md[2].to_i * 60 + md[3].to_i + md[4].to_i * 0.1 if md
     end
 
     def jockey_key
