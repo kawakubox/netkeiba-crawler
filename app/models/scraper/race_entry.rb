@@ -27,7 +27,7 @@ module Scraper
         course_condition: race_meta.course_condition
       )
 
-      entry_table.search('tr')[1..-1].each do |tr|
+      entries.each do |tr|
         horse = horse(tr)
         horse.save!
         jockey = jockey(tr)
@@ -45,7 +45,6 @@ module Scraper
           parser = Scraper::RaceResultCell.new(td.to_html)
           next unless parser.valid?
           r = Race.find_or_create_by!(key: parser.race_key)
-          j = Jockey.find_or_create_by!(key: parser.jockey_key)
           hr = HorseResult.find_or_create_by!(horse: horse, race: r)
 
           hr.update!(parser.params)
@@ -55,8 +54,8 @@ module Scraper
 
     private
 
-    def entry_table
-      @doc.at('table.denmaLs')
+    def entries
+      @doc.at('table.denmaLs').search('tr')[1..-1]
     end
 
     def gate_number(tr)
