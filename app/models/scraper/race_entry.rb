@@ -86,7 +86,7 @@ module Scraper
     end
 
     def jockey_weight(tr)
-      tr.at('td:nth(4) > a').text.match(/([\d.]+)/).to_f
+      tr.at('td:nth(4)').text.match(/([\d.]+)/)[1].to_f
     end
   end
 end
