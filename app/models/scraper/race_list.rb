@@ -15,6 +15,7 @@ module Scraper
           event: @event
         ) do |race|
           race.name = e.text.strip
+          race.race_name = RaceName.find_or_create_by!(long_name: e.text.strip)
         end
       end
     end
