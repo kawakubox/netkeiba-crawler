@@ -12,8 +12,8 @@
         <% @races.each do |r| %>
           <tr>
             <td><%= r.number %>R</td>
-            <td><%= r.name %></td>
             <td><%= r.distance %></td>
+            <td><%= link_to(r.name, race_path(r.key)) %></td>
           </tr>
         <% end %>
       </tbody>

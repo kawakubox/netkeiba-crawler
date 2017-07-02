@@ -15,7 +15,7 @@
     </thead>
     <% @events.each do |e| %>
       <tr>
-        <td><%= link_to(e.held_on, event_races_path(e)) %></td>
+        <td><%= link_to(e.held_on, event_races_path(e.key)) %></td>
         <td><%= e.name %></td>
       </tr>
     <% end %>
