@@ -16,7 +16,7 @@
 </div>
 
 <div>
-  <table>
+  <table id="entry" class="table">
     <thead>
       <tr>
         <th>枠番</th>
@@ -35,23 +35,24 @@
               <%= e.gate_number %>
             </td>
           <% end %>
-          <td><%= e.horse_number %></td>
+          <td class="gate"><%= e.horse_number %></td>
           <td><%= e.horse.name %></td>
-          <td><%= e.jockey.name %> <%= e.jockey_weight %></td>
+          <td>
+            <%= e.jockey.name %><br><%= e.jockey_weight %>
+          </td>
 
-          <% e.horse.latest_results(e.race.event.held_on).each do |hr| %>
-            <% race = hr.race %>
-            <td>
+          <% e.horse.latest_results(e.held_on).each do |hr| %>
+            <td class="result">
               <div>
-                <div>
-                  <%= race.name %>
-                </div>
-                <div>
-                  <%= race.distance %>
-                </div>
-                <div>
-                  <%= hr.order %>(<%= hr.popularity %>人)
-                </div>
+                <div><%= hr.held_on %></div>
+                <div><%= hr.race.event.name %></div>
+                <div><%= hr.short_name %></div>
+                <div><%= hr.distance %></div>
+                <div><%= (hr.race_time.to_i / 60).to_s + ':' + sprintf('%02d', hr.race_time.to_i % 60) + '.' + hr.race_time.to_s[-1] %></div>
+                <div><%= hr.order %>(<%= hr.popularity %>人)</div>
+                <div><%= hr.jockey.name %> <%= hr.jockey_weight %></div>
+                <div><%= hr.corner_position %> (<%= hr.last_3f %>)</div>
+                <div><%= hr.horse_weight %> (<%= sprintf('%+d', hr.weight_diff) %>)</div>
               </div>
             </td>
           <% end %>

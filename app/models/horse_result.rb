@@ -8,4 +8,10 @@ class HorseResult < ApplicationRecord
 
   validates :horse_id, presence: true, uniqueness: { scope: :race_id }
   validates :race_id,  presence: true
+
+  delegate :short_name, :distance, to: :race
+
+  def held_on
+    race.event.held_on
+  end
 end

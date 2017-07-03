@@ -25,6 +25,8 @@ class Race < ApplicationRecord
 
   before_validation :create_event
 
+  delegate :short_name, to: :race_name
+
   def number
     key.slice(-2, 2).to_i
   end
@@ -35,6 +37,21 @@ class Race < ApplicationRecord
 
   def yahoo_race_result_time_url
     URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{key}/?page=3").to_s
+  end
+
+  def course_name
+    case key[2, 2]
+    when '01' then '札幌'
+    when '02' then '函館'
+    when '03' then '福島'
+    when '04' then '新潟'
+    when '05' then '東京'
+    when '06' then '中山'
+    when '07' then '中京'
+    when '08' then '京都'
+    when '09' then '阪神'
+    when '10' then '小倉'
+    end
   end
 
   private

@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#entry td {
+  vertical-align: middle;
+}
+
 .gate {
   text-align: center;
 }
@@ -39,4 +43,9 @@
 
 .gate-8 {
   background-color: pink;
+}
+
+.result {
+  width: 150px;
+  font-size: 1.0rem;
 }
