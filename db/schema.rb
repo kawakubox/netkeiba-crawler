@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170627164227) do
+ActiveRecord::Schema.define(version: 20170703115109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,18 @@ ActiveRecord::Schema.define(version: 20170627164227) do
     t.date     "birthday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "sex"
+    t.string   "body_color"
+    t.integer  "sire_id"
+    t.integer  "mare_id"
+    t.integer  "trainer_id"
+    t.string   "owner"
+    t.string   "breeder"
+    t.string   "birthplace"
     t.index ["key"], name: "index_horses_on_key", unique: true, using: :btree
+    t.index ["mare_id"], name: "index_horses_on_mare_id", using: :btree
+    t.index ["sire_id"], name: "index_horses_on_sire_id", using: :btree
+    t.index ["trainer_id"], name: "index_horses_on_trainer_id", using: :btree
   end
 
   create_table "jockeys", force: :cascade do |t|
