@@ -1,3 +1,16 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#"><%= @race.event.name %></a>
+  </div>
+  <ul class="nav navbar-nav">
+    <% @races.each do |race| %>
+      <li class="<%= 'active' if race.key == params[:id] %>">
+        <a href="<%= race_path(race.key) %>"><%= race.number %>R</a>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+
 <div>
   <h1><%= @race.name %></h1>
 </div>

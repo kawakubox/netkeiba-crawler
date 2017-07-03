@@ -10,5 +10,6 @@ class RacesController < ApplicationController
     @race = Race.find_by(key: params[:id])
     @entries = @race.horse_results.order(:horse_number)
     @gate_manager = GateManager.new(@entries.count)
+    @races = @race.event.races.order(:key)
   end
 end
