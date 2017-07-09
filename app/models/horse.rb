@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Horse < ApplicationRecord
-  validates :key, presence: true, uniqueness: true, format: /\A\d{10}\Z/
+  validates :key, presence: true, uniqueness: true, format: /\A[a-z0-9]{10}\Z/
 
   belongs_to :sire,    foreign_key: :sire_id, class_name: :Horse
   belongs_to :mare,    foreign_key: :mare_id, class_name: :Horse
