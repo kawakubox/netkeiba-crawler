@@ -8,10 +8,20 @@ class Horse < ApplicationRecord
   belongs_to :trainer,     optional: true
   has_many :horse_results
 
+  enum sex: %i[male female other]
+
   def latest_results(date, limit = 5)
     horse_results.joins(race: [:event])
                  .where('events.held_on < ?', date)
                  .order('events.held_on desc')
                  .limit(limit)
+  end
+
+  def netkeiba_url
+    "http://db.netkeiba.com/horse/#{key}/"
+  end
+
+  def netkeiba_ped_url
+    "http://db.netkeiba.com/horse/ped/#{key}/"
   end
 end
