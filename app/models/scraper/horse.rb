@@ -65,7 +65,9 @@ module Scraper
     end
 
     def trainer
-      key = prof_table.at('tr:nth(2) td a').attr('href').split('/').last
+      element = prof_table.at('tr:nth(2) td a')
+      return unless element
+      key = element.attr('href').split('/').last
       Trainer.find_or_create_by!(key: key) do |t|
         t.name = prof_table.at('tr:nth(2) td a').text.strip
       end
