@@ -73,15 +73,15 @@ module Scraper
     end
 
     def owner
-      prof_table.at('tr:nth(3) td a').text.strip
+      prof_table.at('tr:nth(3) td').text.strip.presence
     end
 
     def breeder
-      prof_table.at('tr:nth(4) td').text.strip
+      prof_table.at('tr:nth(4) td').text.strip.presence
     end
 
     def birthplace
-      prof_table.at('tr:nth(5) td').text.strip
+      prof_table.at('tr:nth(5) td').text.strip.presence
     end
   end
 end
