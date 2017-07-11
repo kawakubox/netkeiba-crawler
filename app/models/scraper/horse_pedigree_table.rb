@@ -29,7 +29,7 @@ module Scraper
       md = one_generation_ago[0].at('a').attr('href').match(%r{horse/([a-z0-9]{10})/})
       return unless md
       ::Horse.find_or_create_by!(key: md[1]) do |h|
-        h.name = one_generation_ago[0].at('a').text
+        h.name = one_generation_ago[0].at('a').text.strip
       end
     end
 
@@ -37,7 +37,7 @@ module Scraper
       md = one_generation_ago[1].at('a').attr('href').match(%r{horse/([a-z0-9]{10})/})
       return unless md
       ::Horse.find_or_create_by!(key: md[1]) do |h|
-        h.name = one_generation_ago[1].at('a').text
+        h.name = one_generation_ago[1].at('a').text.strip
       end
     end
   end
