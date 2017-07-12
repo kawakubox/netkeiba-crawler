@@ -26,7 +26,9 @@ module Scraper
     end
 
     def sire
-      md = one_generation_ago[0].at('a').attr('href').match(%r{horse/([a-z0-9]{10})/})
+      element = one_generation_ago[0].at('a')
+      return unless element
+      md = element.attr('href').match(%r{horse/([a-z0-9]{10})/})
       return unless md
       ::Horse.find_or_create_by!(key: md[1]) do |h|
         h.name = one_generation_ago[0].at('a').text.strip
@@ -34,7 +36,9 @@ module Scraper
     end
 
     def mare
-      md = one_generation_ago[1].at('a').attr('href').match(%r{horse/([a-z0-9]{10})/})
+      element = one_generation_ago[1].at('a')
+      return unless element
+      md = element.attr('href').match(%r{horse/([a-z0-9]{10})/})
       return unless md
       ::Horse.find_or_create_by!(key: md[1]) do |h|
         h.name = one_generation_ago[1].at('a').text.strip
