@@ -39,8 +39,11 @@ module Scraper
     end
 
     def sex
-      sex = horse_title.at('.txt_01').text.split(/[[:space:]]/)[1]
-      case sex.first
+      element = horse_title.at('.txt_01')
+      return unless element
+      md = element.text.match(/[[:space:]](牡|牝|騙|セ)[[:space:]]/)
+      return unless md
+      case md[1]
       when '牡' then :male
       when '牝' then :female
       when 'セ' || '騙' then :other
