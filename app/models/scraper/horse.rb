@@ -35,7 +35,7 @@ module Scraper
     end
 
     def name
-      horse_title.at('h1').text.strip.split(' ', 2).first.gsub(/(○外|□外|○地|□地|○父|○市)/, '').strip
+      @doc.at('title').text.split('|').first.strip
     end
 
     def sex
