@@ -61,6 +61,7 @@ module Scraper
 
     def birthday
       year, month, day = prof_table.at('tr:nth(1) td').text.split(/[年月日]/).map(&:to_i)
+      return unless year && month && day
       Date.new(year, month, day)
     end
 
