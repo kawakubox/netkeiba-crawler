@@ -11,7 +11,8 @@ class Horse < ApplicationRecord
   enum sex: %i[male female other]
 
   def latest_results(date, limit = 5)
-    horse_results.joins(race: [:event])
+    horse_results.includes(:jockey, race: %i[race_name event])
+                 .joins(race: [:event])
                  .where('events.held_on < ?', date)
                  .order('events.held_on desc')
                  .limit(limit)
