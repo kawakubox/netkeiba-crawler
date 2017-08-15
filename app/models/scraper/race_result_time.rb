@@ -22,7 +22,7 @@ module Scraper
           hr = HorseResult.find_or_create_by!(horse: horse, race: r)
 
           hr.update!(
-            order: parser.order,
+            order_of_finish: parser.order_of_finish,
             last_3f: parser.last_3f,
             corner_position: parser.corner_position
           )

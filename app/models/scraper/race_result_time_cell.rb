@@ -15,7 +15,7 @@ module Scraper
       md[1] if md
     end
 
-    def order
+    def order_of_finish
       md = @doc.at('div:nth(1)').attr('class').match(/i(\d{2})(\d{2})/)
       md[2].to_i if md
     end

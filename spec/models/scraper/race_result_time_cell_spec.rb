@@ -8,7 +8,7 @@ RSpec.describe Scraper::RaceResultTimeCell do
 
   its(:race_key) { is_expected.to eq '1505021210' }
   its(:course_condition) { is_expected.to eq '01' }
-  its(:order) { is_expected.to eq 1 }
+  its(:order_of_finish) { is_expected.to eq 1 }
   its(:last_3f) { is_expected.to eq 33.9 }
   its(:corner_position) { is_expected.to eq '08-08-08-07' }
 end
