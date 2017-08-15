@@ -49,7 +49,7 @@
                 <div><%= hr.short_name %></div>
                 <div><%= hr.distance %></div>
                 <div><%= (hr.race_time.to_i / 60).to_s + ':' + sprintf('%02d', hr.race_time.to_i % 60) + '.' + hr.race_time.to_s[-1] %></div>
-                <div><%= hr.order %>(<%= hr.popularity %>人)</div>
+                <div><%= hr.order_of_finish %>(<%= hr.popularity %>人)</div>
                 <div><%= hr.jockey.name %> <%= hr.jockey_weight %></div>
                 <div><%= hr.corner_position %> (<%= hr.last_3f %>)</div>
                 <div><%= hr.horse_weight %> (<%= sprintf('%+d', hr.weight_diff) %>)</div>
