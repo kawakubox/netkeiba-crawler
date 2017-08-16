@@ -36,7 +36,7 @@ module Scraper
       element = tr.at('td:nth(3) > a')
       key = element.attr('href').match(%r{/directory/horse/(\d+)/})[1]
       name = element.text.strip
-      Horse.find_or_initialize_by(key: key) do |h|
+      ::Horse.find_or_initialize_by(key: key) do |h|
         h.name = name
       end
     end
