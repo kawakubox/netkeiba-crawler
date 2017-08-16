@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170703115109) do
     t.integer  "horse_number"
     t.integer  "popularity"
     t.integer  "course_condition"
-    t.decimal  "last_3f",          precision: 3, scale: 1
+    t.decimal  "last_3f",          precision: 4, scale: 1
     t.string   "corner_position"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
