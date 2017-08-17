@@ -6,6 +6,7 @@ class Race < ApplicationRecord
   belongs_to :event
   belongs_to :race_name, optional: true
   has_many :horse_results
+  has_many :race_entries
 
   enum grade: { g1: 1, g2: 2, g3: 3 }
   enum weather: %i[sunny cloudy rainy snowy]
@@ -37,6 +38,10 @@ class Race < ApplicationRecord
 
   def yahoo_race_result_time_url
     URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{key}/?page=3").to_s
+  end
+
+  def netkeiba_race_result_url
+    "http://race.netkeiba.com/?pid=race&id=p20#{key}&mode=result".to_s
   end
 
   def course_name
