@@ -40,6 +40,10 @@ class Race < ApplicationRecord
     URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{key}/?page=3").to_s
   end
 
+  def netkeiba_race_result_url
+    "http://race.netkeiba.com/?pid=race&id=p20#{key}&mode=result".to_s
+  end
+
   def course_name
     case key[2, 2]
     when '01' then '札幌'
