@@ -35,12 +35,15 @@ module Scraper
     end
 
     def name
-      horse_title.at('h1').text.gsub(/[[:space:]]/, '').gsub(/(○外|□外|○地|□地)/, '').strip
+      @doc.at('title').text.split('|').first.strip
     end
 
     def sex
-      sex = horse_title.at('.txt_01').text.split(/[[:space:]]/)[1]
-      case sex.first
+      element = horse_title.at('.txt_01')
+      return unless element
+      md = element.text.match(/[[:space:]](牡|牝|騙|セ)[[:space:]]/)
+      return unless md
+      case md[1]
       when '牡' then :male
       when '牝' then :female
       when 'セ' || '騙' then :other
@@ -61,27 +64,29 @@ module Scraper
 
     def birthday
       year, month, day = prof_table.at('tr:nth(1) td').text.split(/[年月日]/).map(&:to_i)
+      return unless year && month && day
       Date.new(year, month, day)
     end
 
     def trainer
-      key = prof_table.at('tr:nth(2) td a').attr('href').split('/').last
-      name = prof_table.at('tr:nth(2) td a').text.strip
+      element = prof_table.at('tr:nth(2) td a')
+      return unless element
+      key = element.attr('href').split('/').last
       Trainer.find_or_create_by!(key: key) do |t|
-        t.name = name
+        t.name = prof_table.at('tr:nth(2) td a').text.strip
       end
     end
 
     def owner
-      prof_table.at('tr:nth(3) td a').text.strip
+      prof_table.at('tr:nth(3) td').text.strip.presence
     end
 
     def breeder
-      prof_table.at('tr:nth(4) td').text.strip
+      prof_table.at('tr:nth(4) td').text.strip.presence
     end
 
     def birthplace
-      prof_table.at('tr:nth(5) td').text.strip
+      prof_table.at('tr:nth(5) td').text.strip.presence
     end
   end
 end
