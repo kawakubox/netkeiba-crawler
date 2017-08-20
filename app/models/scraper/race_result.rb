@@ -44,7 +44,7 @@ module Scraper
     end
 
     def order_of_finish(tr)
-      tr.at('td:nth(1)').text.to_i
+      tr.at('td:nth(1)').text.presence
     end
 
     def race_time(tr)
