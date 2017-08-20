@@ -6,6 +6,7 @@ class Race < ApplicationRecord
   belongs_to :event
   belongs_to :race_name, optional: true
   has_many :horse_results
+  has_many :race_entries
 
   enum grade: { g1: 1, g2: 2, g3: 3 }
   enum weather: %i[sunny cloudy rainy snowy]
