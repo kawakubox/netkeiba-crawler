@@ -2,8 +2,8 @@
 
 module Scraper
   class Horse
-    def initialize(key)
-      @horse = ::Horse.find_or_initialize_by(key: key)
+    def initialize(id)
+      @horse = ::Horse.find_or_initialize_by(id)
       response = Faraday.get(@horse.netkeiba_url)
       raise StandardError unless response.success?
       body = response.body
