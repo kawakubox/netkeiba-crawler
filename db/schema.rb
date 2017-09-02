@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(version: 20170703115109) do
   end
 
   create_table "horse_results", force: :cascade do |t|
-    t.integer  "horse_id",                                 null: false
+    t.string   "horse_id",                                 null: false
     t.integer  "race_id",                                  null: false
     t.integer  "jockey_id"
     t.integer  "trainer_id"
