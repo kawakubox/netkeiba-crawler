@@ -82,7 +82,7 @@
     t.integer  "course_condition"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.integer  "event_id",         null: false
+    t.string   "event_id",                     null: false
     t.integer  "kind"
     t.integer  "course_type"
     t.integer  "direction"
