@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(version: 20170903013720) do
+ActiveRecord::Schema.define(version: 20170903042833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20170903013720) do
   create_table "horse_results", force: :cascade do |t|
     t.string   "horse_id",                                 null: false
     t.integer  "race_id",                                  null: false
-    t.integer  "jockey_id"
     t.integer  "order"
+    t.string   "jockey_id"
     t.string   "trainer_id"
     t.decimal  "race_time",        precision: 4, scale: 1
     t.decimal  "jockey_weight",    precision: 3, scale: 1
