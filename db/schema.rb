@@ -87,21 +87,22 @@ ActiveRecord::Schema.define(version: 20170903094046) do
   end
 
   create_table "races", force: :cascade do |t|
-    t.string   "key",              null: false
+    t.string   "key",                          null: false
     t.integer  "ordinal"
     t.string   "name"
     t.integer  "grade"
     t.integer  "distance"
     t.integer  "weather"
     t.integer  "course_condition"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "event_id",                     null: false
     t.integer  "kind"
     t.integer  "course_type"
     t.integer  "direction"
     t.integer  "circumference"
     t.integer  "race_name_id"
+    t.integer  "horses_count",     default: 0, null: false
     t.index ["event_id"], name: "index_races_on_event_id", using: :btree
     t.index ["key"], name: "index_races_on_key", unique: true, using: :btree
     t.index ["race_name_id"], name: "index_races_on_race_name_id", using: :btree
