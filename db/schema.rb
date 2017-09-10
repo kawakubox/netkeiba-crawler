@@ -1,3 +1,4 @@
+ActiveRecord::Schema.define(version: 20170903094046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +62,19 @@
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_jockeys_on_key", unique: true, using: :btree
+  end
+
+  create_table "payouts", force: :cascade do |t|
+    t.integer  "race_id",    null: false
+    t.integer  "bet_type",   null: false
+    t.integer  "number_1"
+    t.integer  "number_2"
+    t.integer  "number_3"
+    t.integer  "payout",     null: false
+    t.integer  "popularity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["race_id"], name: "index_payouts_on_race_id", using: :btree
   end
 
   create_table "race_names", force: :cascade do |t|
