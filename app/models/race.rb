@@ -7,6 +7,7 @@ class Race < ApplicationRecord
   belongs_to :race_name, optional: true
   has_many :horse_results
   has_many :race_entries
+  has_many :payouts
 
   enum grade: { g1: 1, g2: 2, g3: 3 }
   enum weather: %i[sunny cloudy rainy snowy]
@@ -56,6 +57,14 @@ class Race < ApplicationRecord
     when '08' then '京都'
     when '09' then '阪神'
     when '10' then '小倉'
+    end
+  end
+
+  def crawl_payout
+    payouts.map(&:destroy!)
+    PayoutCrawler.new("http://db.netkeiba.com/race/20#{id}/").crawl.each do |payout|
+      payout.race = self
+      payout.save!
     end
   end
 

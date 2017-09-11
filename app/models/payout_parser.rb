@@ -45,6 +45,7 @@ class PayoutParser
 
   def payout_cells(element)
     (1..3).map do |i|
+      next [] if element.nil?
       element.search("td:nth(#{i})").children.map do |e|
         if i == 1
           e.text.split(/[-→]/).map(&:strip).presence
