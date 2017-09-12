@@ -11,11 +11,12 @@ class Horse < ApplicationRecord
   enum sex: %i[male female other]
 
   def latest_results(date, limit = 5)
-    horse_results.includes(:jockey, race: %i[race_name event])
+    results = horse_results.includes(:jockey, race: %i[race_name event])
                  .joins(race: [:event])
                  .where('events.held_on < ?', date)
                  .order('events.held_on desc')
                  .limit(limit)
+    results.to_a.concat(Array.new(limit, nil)).slice(0, limit)
   end
 
   def netkeiba_url
