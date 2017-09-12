@@ -4,7 +4,14 @@ class EntryRowParser
   attr_reader :doc
 
   def initialize(html)
-    @doc = Nokogiri::HTML(html)
+    @doc = case html
+           when Nokogiri::XML::Element
+             html
+           when String
+             Nokogiri::HTML(html)
+           else
+             raise '想定外の型'
+           end
   end
 
   def gate_number
