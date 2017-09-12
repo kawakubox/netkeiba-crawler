@@ -26,7 +26,10 @@ class EntryRowParser
     url   = @doc.at('td.horsename a').attr('href')
     title = @doc.at('td.horsename a').attr('title')
     key   = url.split('/').last
-    Horse.find_or_create_by!(id: key) { |h| h.name = title; h.key = key }
+    Horse.find_or_create_by!(id: key) do |h|
+      h.name = title
+      h.key = key
+    end
   end
 
   # <diary_snap_cut> が悪さをしていて1ずれる
