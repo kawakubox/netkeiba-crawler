@@ -60,6 +60,15 @@ class Race < ApplicationRecord
     end
   end
 
+  def crawl_entry
+    EntryCrawler.new("http://race.netkeiba.com/?pid=race_old&id=p20#{id}").crawl.each do |entry|
+      unless HorseResult.find_by(race: self, horse: entry.horse)
+        entry.race = self
+        entry.save!
+      end
+    end
+  end
+
   def crawl_payout
     payouts.map(&:destroy!)
     PayoutCrawler.new("http://db.netkeiba.com/race/20#{id}/").crawl.each do |payout|
