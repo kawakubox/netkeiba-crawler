@@ -10,10 +10,10 @@ module Scraper
     def scrape
       @doc.search('table.scheLs tr[has(td:nth(2))]').map do |tr|
         e = tr.at('td a')
-        Race.find_or_initialize_by(
-          key: e.attr('href').match(%r{/race/result/(\d{10})/})[1],
-          event: @event
-        ) do |race|
+        key = e.attr('href').match(%r{/race/result/(\d{10})/})[1]
+        Race.find_or_initialize_by(id: key) do |race|
+          race.event = @event
+          race.key = key
           race.name = e.text.strip
           race.race_name = RaceName.find_or_create_by!(long_name: e.text.strip)
         end
