@@ -2,7 +2,7 @@
 
 class RacesController < ApplicationController
   def index
-    @event = Event.find_by(key: params[:event_id])
+    @event = Event.find(params[:event_id])
     @races = Race.where(event: @event).order(:id) || []
   end
 
