@@ -11,7 +11,6 @@ class ScheduleParser
       ec = EventRowParser.new(e, year: @year, month: @month)
       Event.find_or_initialize_by(id: ec.key).tap do |ev|
         ev.id = ec.key
-        ev.key = ec.key
         ev.held_on = ec.date
         ev.name = ec.name
       end

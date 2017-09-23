@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :event do
-    key { FFaker::String.from_regexp /\d{8}/ }
+    id { FFaker::String.from_regexp /\d{8}/ }
     held_on { Time.zone.today }
     name do
       n = Random.rand(1..5)
