@@ -8,7 +8,7 @@ class RaceListParser
   def races
     rows.map do |tr|
       e = tr.at('td a')
-      key = e.attr('href').match(%r{/race/result/(\d{10})/})[1]
+      key = '20' + e.attr('href').match(%r{/race/result/(\d{10})/})[1]
       Race.find_or_initialize_by(id: key) do |race|
         race.event = @event
         race.name = e.text.strip
