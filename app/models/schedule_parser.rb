@@ -24,6 +24,7 @@ class ScheduleParser
       @year = year
       @month = month
       @day = tr.at('td:nth(1)').child.text.match(/(\d+)日/)[1].to_i
+      @date = Date.new(@year, @month, @day)
       @name = tr.at('td:nth(1) a').text.strip
     end
   end
