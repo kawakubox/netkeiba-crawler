@@ -4,8 +4,8 @@
   </div>
   <ul class="nav navbar-nav">
     <% @races.each do |race| %>
-      <li class="<%= 'active' if race.key == params[:id] %>">
-        <a href="<%= race_path(race.key) %>"><%= race.number %>R</a>
+      <li class="<%= 'active' if race.id == params[:id] %>">
+        <a href="<%= race_path(race) %>"><%= race.number %>R</a>
       </li>
     <% end %>
   </ul>

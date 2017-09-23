@@ -17,7 +17,6 @@ class Race < ApplicationRecord
   enum direction: %i[right left straight]
   enum circumference: %i[inner outer outer_to_inner]
 
-  validates :key, presence: true, uniqueness: true, format: /\A\d{10}\Z/
   validates :ordinal, allow_nil: true, numericality: { only_integer: true, greater_than: 0 }
   validates :name, allow_nil: true, length: { minimum: 1 }
   validates :grade, allow_nil: true, inclusion: { in: Race.grades.keys }
@@ -30,23 +29,23 @@ class Race < ApplicationRecord
   delegate :short_name, to: :race_name
 
   def number
-    key.slice(-2, 2).to_i
+    id.slice(-2, 2).to_i
   end
 
   def yahoo_race_entry_url
-    URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{key}/?page=2").to_s
+    URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{id[2..-1]}/?page=2").to_s
   end
 
   def yahoo_race_result_time_url
-    URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{key}/?page=3").to_s
+    URI.join(YAHOO_KEIBA_DOMAIN, "/race/denma/#{id[2..-1]}/?page=3").to_s
   end
 
   def netkeiba_race_result_url
-    "http://race.netkeiba.com/?pid=race&id=p20#{key}&mode=result".to_s
+    "http://race.netkeiba.com/?pid=race&id=p20#{id}&mode=result".to_s
   end
 
   def course_name
-    case key[2, 2]
+    case id[2, 2]
     when '01' then '札幌'
     when '02' then '函館'
     when '03' then '福島'

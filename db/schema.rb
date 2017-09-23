@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 20170903094046) do
   end
 
   create_table "races", force: :cascade do |t|
-    t.string   "key",                          null: false
     t.integer  "ordinal"
     t.string   "name"
     t.integer  "grade"
@@ -104,7 +103,6 @@ ActiveRecord::Schema.define(version: 20170903094046) do
     t.integer  "race_name_id"
     t.integer  "horses_count",     default: 0, null: false
     t.index ["event_id"], name: "index_races_on_event_id", using: :btree
-    t.index ["key"], name: "index_races_on_key", unique: true, using: :btree
     t.index ["race_name_id"], name: "index_races_on_race_name_id", using: :btree
   end
 

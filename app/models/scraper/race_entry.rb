@@ -44,7 +44,7 @@ module Scraper
         tr.search('td')[4..-1].each do |td|
           parser = Scraper::RaceResultCell.new(td.to_html)
           next unless parser.valid?
-          r = Race.find_or_create_by!(key: parser.race_key)
+          r = Race.find_or_create_by!(id: parser.race_key)
           hr = HorseResult.find_or_create_by!(horse: horse, race: r)
 
           hr.update!(parser.params)

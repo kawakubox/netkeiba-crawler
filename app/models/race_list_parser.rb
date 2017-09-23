@@ -11,7 +11,6 @@ class RaceListParser
       key = e.attr('href').match(%r{/race/result/(\d{10})/})[1]
       Race.find_or_initialize_by(id: key) do |race|
         race.event = @event
-        race.key = key
         race.name = e.text.strip
         race.race_name = RaceName.find_or_create_by!(long_name: e.text.strip)
       end
