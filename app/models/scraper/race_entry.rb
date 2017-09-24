@@ -11,7 +11,7 @@ module Scraper
     end
 
     def scrape!
-      race_meta = Scraper::RaceMetaCell.new(@html)
+      race_meta = RaceMetaParser.new(@html)
 
       @race.update!(
         ordinal:          race_meta.ordinal,
