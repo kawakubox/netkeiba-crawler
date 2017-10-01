@@ -42,7 +42,7 @@ RSpec.describe Race, type: :model do
   describe 'before_save' do
     it 'create event' do
       expect { Race.create!(key: '1234567890') }
-        .to change { Event.find_by(key: '12345678') }.from(nil).to(be_present)
+        .to change { Event.find('12345678') }.from(nil).to(be_present)
     end
   end
 end
